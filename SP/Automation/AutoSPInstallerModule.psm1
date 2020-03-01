@@ -2,7 +2,7 @@
 # EXTERNAL FUNCTIONS
 # ===================================================================================
 
-# Check that the version of the script matches the Version (essentially the schema) of the input XML so we don't have any unexpected behavior
+#Check that the version of the script matches the Version (essentially the schema) of the input XML so we don't have any unexpected behavior
 Function CheckXMLVersion ([xml]$xmlInput)
 {
     $getXMLVersion = $xmlInput.Configuration.Version
@@ -25,6 +25,10 @@ Function CheckXMLVersion ([xml]$xmlInput)
         Pause "proceed with running AutoSPInstaller if you are sure this is OK, or Ctrl-C to exit" "y"
     }
 }
+
+#region CheckXMLVersion
+
+#endregion 
 
 #region Validate Passphrase
 Function ValidatePassphrase ([xml]$xmlInput)
