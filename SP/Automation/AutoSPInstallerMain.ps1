@@ -7,7 +7,8 @@
 )
 
 # Globally update all instances of "localhost" in the input file to actual local server name
-[xml]$xmlInput = (Get-Content $inputFile -ErrorAction Inquire) -replace ("localhost", $env:COMPUTERNAME) # "-ErrorAction Inquire" should show something meaningful now instead of just quickly skipping over a bad or malformed XML
+[xml]$xmlInput = (Get-Content $inputFile -ErrorAction Inquire) -replace ("localhost", $env:COMPUTERNAME) 
+# "-ErrorAction Inquire" should show something meaningful now instead of just quickly skipping over a bad or malformed XML
 
 # ===================================================================================
 #
@@ -105,7 +106,6 @@ else
 Write-Host -ForegroundColor White " - Setting power management plan to `"High Performance`"..."
 Start-Process -FilePath "$env:SystemRoot\system32\powercfg.exe" -ArgumentList "/s 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c" -NoNewWindow
 #endregion
-
 #region Remote Install
 Function Install-Remote
 {
@@ -161,7 +161,6 @@ Function Install-Remote
     }
 }
 #endregion
-
 #region Prepare For Install
 Function PrepForInstall
 {
@@ -183,7 +182,6 @@ Function PrepForInstall
     }
 }
 #endregion
-
 #region Install SharePoint binaries
 Function Start-Install
 {
@@ -205,7 +203,6 @@ Function Start-Install
     Set-ShortcutRunAsAdmin -shortcutFile "$env:ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft SharePoint $spYear Products\SharePoint $spYear Management Shell.lnk"
 }
 #endregion
-
 #region Setup Farm
 Function Set-FarmConfig ([xml]$xmlInput)
 {
