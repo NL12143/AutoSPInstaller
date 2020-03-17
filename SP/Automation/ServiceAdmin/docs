@@ -1,0 +1,44 @@
+
+
+Get-SPServiceApplicationSecurity
+https://docs.microsoft.com/en-us/powershell/module/sharepoint-server/get-spserviceapplicationsecurity
+
+The Get-SPServiceApplicationSecurity cmdlet returns a security object for the specified service application. 
+Use this cmdlet with the Grant-SPObjectSecurity and Set-SPServiceApplicationSecurity cmdlets to manage security 
+for a service application.
+
+$serviceApp
+$sa = Get-SPServiceApplication | ?{$_.TypeName -eq 'User Profile Service Application'}
+
+$security = Get-SPServiceApplicationSecurity $serviceApp -Admin
+Grant-SPObjectSecurity $security $principal "Full Control"
+Set-SPServiceApplicationSecurity $serviceApp -Admin $security
+
+
+Grant-SPObjectSecurity
+https://docs.microsoft.com/en-us/powershell/module/sharepoint-server/grant-spobjectsecurity
+The Grant-SPObjectSecurity cmdlet adds a new security principal, such as a user, to a SPObjectSecurity object. 
+An SPObjectSecurity object is a common object that is used to represent the security access control list (ACL) 
+of SharePoint administrative objects, in particular, service applications.
+
+https://github.com/MicrosoftDocs/office-docs-powershell/blob/master/sharepoint/
+sharepoint-ps/sharepoint-server/Grant-SPObjectSecurity.md
+Grant-SPObjectSecurity [-Identity] <SPObjectSecurity> [-Principal] <SPClaim> [-Rights] <String[]>
+ [-AssignmentCollection <SPAssignmentCollection>] [-Replace] [<CommonParameters>]
+
+Example
+
+$principal = New-SPClaimsPrincipal "CONTOSO\JaneDoe" -IdentityType WindowsSamAccountName 
+$sa = Get-SPServiceApplication | ?{$_.TypeName -eq 'User Profile Service Application'}
+$security = Get-SPServiceApplicationSecurity $sa -Admin
+Grant-SPObjectSecurity $security $principal "Full Control"
+Set-SPServiceApplicationSecurity $sa -Admin $security
+
+-Identity
+Specifies the SPObjectSecurity object to which the new security principal is added. 
+You can use the Get-SPServiceApplicationSecurity cmdlet to get a SPObjectSecurity object .
+$SPObjectSecurity = Get-SPServiceApplicationSecurity $serviceApp -Admin
+
+Set-SPServiceApplicationSecurity
+
+

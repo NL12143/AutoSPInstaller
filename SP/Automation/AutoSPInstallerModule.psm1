@@ -1,7 +1,10 @@
 ﻿# ===================================================================================
 # EXTERNAL FUNCTIONS
 # ===================================================================================
+Cntrl-M to collapse all regions 
+$psISE.CurrentFile.Editor.ToggleOutliningExpansion()
 
+#region CheckXMLVersion
 #Check that the version of the script matches the Version (essentially the schema) of the input XML so we don't have any unexpected behavior
 Function CheckXMLVersion ([xml]$xmlInput)
 {
@@ -25,10 +28,7 @@ Function CheckXMLVersion ([xml]$xmlInput)
         Pause "proceed with running AutoSPInstaller if you are sure this is OK, or Ctrl-C to exit" "y"
     }
 }
-
-#region CheckXMLVersion
-
-#endregion 
+#endregion
 
 #region Validate Passphrase
 Function ValidatePassphrase ([xml]$xmlInput)

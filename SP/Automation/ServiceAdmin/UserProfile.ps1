@@ -1,5 +1,4 @@
 ﻿
-
 #region Create User Profile Service Application
 
 Function CreateUserProfileServiceApplication ([xml]$xmlInput)

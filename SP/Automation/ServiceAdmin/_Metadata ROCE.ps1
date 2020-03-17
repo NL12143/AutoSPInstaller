@@ -1,4 +1,19 @@
 ﻿
+                $metadataServiceAppToSecure = Get-SPServiceApplication | Where-Object {$_.GetType().ToString() -eq "Microsoft.SharePoint.Taxonomy.MetadataWebServiceApplication"}
+                $metadataServiceAppIDToSecure = $metadataServiceAppToSecure.Id
+                # Create a variable that contains the list of administrators for the service application
+                $metadataServiceAppSecurity = Get-SPServiceApplicationSecurity $metadataServiceAppIDToSecure
+                ForEach ($account in ($xmlInput.Configuration.Farm.ManagedAccounts.ManagedAccount))
+                {
+                    # Create a variable that contains the claims principal for the service accounts
+                    Write-Host -ForegroundColor White "  - $($account.username)..."
+                    $accountPrincipal = New-SPClaimsPrincipal -Identity $account.username -IdentityType WindowsSamAccountName
+                    # Give permissions to the claims principal you just created
+                    Grant-SPObjectSecurity $metadataServiceAppSecurity -Principal $accountPrincipal -Rights "Full Access to Term Store"
+                }
+                # Apply the changes to the Metadata Service application
+                Set-SPServiceApplicationSecurity $metadataServiceAppIDToSecure -objectSecurity $metadataServiceAppSecurity
+
 
 
 #region Create Metadata Service Application
