@@ -1,5 +1,4 @@
  
-
 foreach ($contentAccessAcct in $contentAccessAccounts)
 {
 $contentAccessAcctPrincipal = New-SPClaimsPrincipal -Identity $contentAccessAccount -IdentityType WindowsSamAccountName
